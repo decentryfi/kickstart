@@ -3,8 +3,7 @@ import AppLayout from '../../../components/common/AppLayout';
 import { Input, Form, Button, Message, Menu, Icon } from 'semantic-ui-react';
 import web3 from '../../../../ethereum/web3';
 import CampaignService from '../../../../ethereum/services/CampaignService';
-import { Link, Router } from "../../../../routes";
-import AddressFormatter from '../../../components/common/AddressFormatter';
+import { useRouter } from 'next/router';
 
 
 class NewRequest extends React.Component {
@@ -37,7 +36,7 @@ class NewRequest extends React.Component {
                 .createRequest(description, web3.utils.toWei(amount, 'ether'), receipent)
                 .send({ from: accounts[0] });
 
-            Router.replaceRoute(`/campaigns/${this.props.address}/requests`);
+            useRouter().replace(`/campaigns/${this.props.address}/requests`);
         }
         catch(e) {
             this.setState({

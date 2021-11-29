@@ -1,9 +1,9 @@
 import React from "react";
 import AppLayout from "../../../components/common/AppLayout";
-import { Button, Icon, Menu, Table } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import CampaignService from "../../../../ethereum/services/CampaignService";
-import { Link, Router } from "../../../../routes";
 import RequestRow from "../../../components/RequestRow";
+import { useRouter } from "next/router";
 const { Header, Row, HeaderCell, Body } = Table;
 
 class Requests extends React.Component {
@@ -16,12 +16,12 @@ class Requests extends React.Component {
 
     onApprove = async (index) => {
         await CampaignService.approveRequest(this.props.address, index);
-        Router.replaceRoute(`/campaigns/${this.props.address}/requests`);
+        useRouter().replace(`/campaigns/${this.props.address}/requests`);
     };
 
     onFinalize = async (index) => {
         await CampaignService.finalizeRequest(this.props.address, index);
-        Router.replaceRoute(`/campaigns/${this.props.address}/requests`);
+        useRouter().replace(`/campaigns/${this.props.address}/requests`);
     };
 
     renderRequestsTable(){

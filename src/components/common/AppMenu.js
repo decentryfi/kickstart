@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Icon, Menu } from "semantic-ui-react";
-import { Link } from "../../../routes";
 import CampaignFactory from "../../../ethereum/services/CampaignFactory";
 
 class AppMenu extends React.Component {
@@ -10,24 +9,18 @@ class AppMenu extends React.Component {
         <div style={{marginBottom: "1em"}}>
             <Menu>
                 <Menu.Menu position="left">
-                    <Link route="/">
-                        <a className="item">DecentryFi Kickstart</a>
-                    </Link>
+                    <a className="item" href="/">DecentryFi Kickstart</a>
                 </Menu.Menu>
 
                 <Menu.Menu position="right">
-                    <Link route="/">
-                        <a className="item">
-                            <Icon name="list"/>
-                            Campaigns
-                        </a>
-                    </Link>
-                    <Link route="/campaigns/new">
-                        <a className="item">
-                            <Icon name="plus"/>
-                            Campaign
-                        </a>
-                    </Link>
+                    <a className="item" href="/">
+                        <Icon name="list"/>
+                        Campaigns
+                    </a>
+                    <a className="item" href="/campaign">
+                        <Icon name="plus"/>
+                        Campaign
+                    </a>
                     <a className="item" href="https://github.com/decentryfi/kickstart" target="_blank">
                         <Icon name="github"/>
                         Source
@@ -45,9 +38,9 @@ class AppMenu extends React.Component {
                     style={{display: "flex", alignItems: "center"}}>
                         {(
                             this.props.backRoute ? 
-                                <Link route={this.props.backRoute}>
+                                <a href={this.props.backRoute}>
                                     <Icon style={{ marginBottom: "2px", cursor: "pointer"}} name="arrow left"></Icon>
-                                </Link> : null
+                                </a> : null
                         )}
                     <h3 style={{marginTop: 0, marginLeft: "0.5em"}}>{this.props.pageTitle}</h3>
                 </Menu.Menu>
@@ -55,12 +48,12 @@ class AppMenu extends React.Component {
                 {(
                     this.props.nextRoute ?                 
                     <Menu.Menu position="right">
-                        <Link route={this.props.nextRoute}>
+                        <a href={this.props.nextRoute}>
                             <Button primary fluid >
                                 <Icon name={this.props.nextRouteIcon}/>
                                 {this.props.nextRouteDescription}
                             </Button>
-                        </Link>
+                        </a>
                     </Menu.Menu> : null
                 )}
             </Menu>

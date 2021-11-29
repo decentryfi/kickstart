@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "test": "mocha",
     "contract:deploy": "node ./ethereum/deploy.js",
     "contract:compile": "node ./ethereum/compile.js"

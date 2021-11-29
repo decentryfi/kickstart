@@ -1,0 +1,16 @@
+.campaignDescription{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.campaignDescriptionLink{
+    min-width: 160px;
+    display: inline-flex;
+    justify-content: flex-end
+}
+
+.campaignDescriptionIcon{
+    margin-right: 0.5em;
+}

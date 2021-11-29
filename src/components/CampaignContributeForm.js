@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Form, Button, Message, Icon } from 'semantic-ui-react';
 import web3 from '../../ethereum/web3';
 import CampaignService from '../../ethereum/services/CampaignService';
-import { Router } from '../../routes';
+import { useRouter } from 'next/router';
 
 class CampaignContributeFrom extends React.Component {
     state = {
@@ -32,7 +32,7 @@ class CampaignContributeFrom extends React.Component {
                     from: accounts[0],
                     value: web3.utils.toWei(this.state.contribution, 'ether')
                 });
-            Router.replaceRoute(`/campaigns/${this.props.campaign.options.address}`);
+            useRouter().replace(`/campaigns/${this.props.campaign.options.address}`);
         }
         catch(e) {
             this.setState({

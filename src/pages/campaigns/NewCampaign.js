@@ -1,8 +1,7 @@
 import React from "react";
-import AppLayout from "../../components/common/AppLayout";
 import { Input, Form, Button, Message } from "semantic-ui-react";
-import { Router } from "../../../routes";
 import CampaignFactory from "../../../ethereum/services/CampaignFactory";
+import { useRouter } from "next/router";
 
 class NewCampaign extends React.Component {
     state = {
@@ -21,7 +20,7 @@ class NewCampaign extends React.Component {
 
         try {
             await CampaignFactory.createCamping(this.state.minimumContribution, this.state.title)
-            Router.replaceRoute("/");
+            useRouter().replace("/");
         }
         catch(e) {
             this.setState({
@@ -36,31 +35,28 @@ class NewCampaign extends React.Component {
 
     render() {
         return (
-            <AppLayout backRoute="/"
-            pageTitle="Create campaign">
-                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                    <Form.Field>
-                        <label>Title</label>
-                        <Input value={this.state.title}
-                            onChange={event => this.setState({ title: event.target.value })}
-                            placeholder="Lorem ipsum..." 
-                            disabled={this.state.loading}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Minimum contribution</label>
-                        <Input value={this.state.minimumContribution}
-                            onChange={event => this.setState({ minimumContribution: event.target.value })}
-                            label="ether" 
-                            labelPosition="right"
-                            placeholder="100" 
-                            disabled={this.state.loading}/>
-                    </Form.Field>
-                    <Message error header="Oops!" content={this.state.errorMessage}></Message>
-                    <Button primary 
-                        loading={this.state.loading}
-                        disabled={this.state.loading}> Create</Button>
-                </Form>
-            </AppLayout>
+            <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                <Form.Field>
+                    <label>Title</label>
+                    <Input value={this.state.title}
+                        onChange={event => this.setState({ title: event.target.value })}
+                        placeholder="Lorem ipsum..." 
+                        disabled={this.state.loading}/>
+                </Form.Field>
+                <Form.Field>
+                    <label>Minimum contribution</label>
+                    <Input value={this.state.minimumContribution}
+                        onChange={event => this.setState({ minimumContribution: event.target.value })}
+                        label="ether" 
+                        labelPosition="right"
+                        placeholder="100" 
+                        disabled={this.state.loading}/>
+                </Form.Field>
+                <Message error header="Oops!" content={this.state.errorMessage}></Message>
+                <Button primary 
+                    loading={this.state.loading}
+                    disabled={this.state.loading}> Create</Button>
+            </Form>
         );
     };
 

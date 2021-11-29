@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-import { Card, Icon } from "semantic-ui-react";
-import { Link } from "../../routes";
-import AppLayout from "../components/common/AppLayout";
+import React from "react";
 import AddressFormatter from "../components/common/AddressFormatter";
 import CampaignFactory from "../../ethereum/services/CampaignFactory";
 import CampaignService from "../../ethereum/services/CampaignService";
+import { Card, Icon } from "semantic-ui-react";
+import styles from "./App.module.css";
 
 class App extends React.Component {
 
@@ -16,39 +15,24 @@ class App extends React.Component {
         return { campaigns: summary};
     }
 
-    renderCampaigns() {
+    render() {
         const items = this.props.campaigns.map((campaign) => {
-            
             return {
                 header:  campaign.title,
                 description:() => {
-                    return (<h4 style={{
-                        display: "flex", 
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                    }}>
+                    return (<div className={styles.campaignDescription}>
                         <AddressFormatter address={campaign.campaign._address}/>
-                        <Link route={`/campaigns/${campaign.campaign._address}`}>
-                            <a style={{minWidth: "160px", display: "inline-flex", justifyContent: "flex-end"}}> 
-                                <Icon name="eye" style={{marginRight: "0.5em"}}/>
-                                <span>Campaign details</span>
-                            </a>
-                        </Link>
-                    </h4>)
+                        <a className={styles.campaignDescriptionLink}
+                            href={`/campaigns/${campaign.campaign._address}`} > 
+                            <Icon className="campaignDescriptionIcon" name="eye"/>
+                            <span>Campaign details</span>
+                        </a>
+                    </div>)
                 },
                 fluid: true
             }
         })
         return <Card.Group items={items}></Card.Group>
-    }
-
-    render() {
-        return (
-            <AppLayout
-                pageTitle="Open campaigns">
-                {this.renderCampaigns()}
-            </AppLayout>
-        );
     }
 }
 
